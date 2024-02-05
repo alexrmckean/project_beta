@@ -3,7 +3,7 @@
 Team:
 
 * Alex McKean - Sales
-* Person 2 - Which microservice?
+* Lyle - Service
 
 ## Design
 
