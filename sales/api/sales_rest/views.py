@@ -9,6 +9,7 @@ from django.http import JsonResponse
 class AutomobileVOListEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
+        "import_href",
         "vin",
         "manufacturer",
     ]
@@ -46,6 +47,8 @@ class SaleListEncoder(ModelEncoder):
     ]
     encoders = {
         "automobile": AutomobileVOListEncoder(),
+        "salesperson": SalespeopleListEncoder(),
+        "customer": CustomerListEncoder(),
     }
 
 
@@ -172,6 +175,79 @@ def api_customer(request, pk):
                 safe=False,
             )
         except Customer.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_sale_list(request):
+    if request.method == "GET":
+        sale = Sale.objects.all()
+        return JsonResponse(
+            {"sale": sale}, encoder=SaleListEncoder
+        )
+    else:
+        content = json.loads(request.body)
+        try:
+            # automobile_href = content["automobile"]
+            automobile = AutomobileVO.objects.get(id=content["automobile"])
+            content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid automobile id"},
+                status=400,
+            )
+
+        sale = Sale.objects.create(**content)
+        return JsonResponse(
+            sale,
+            encoder=SaleListEncoder,
+            safe=False,
+        )
+
+
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_sale(request, pk):
+    if request.method == "GET":
+        try:
+            sale = Sale.objects.get(id=pk)
+            return JsonResponse(
+                sale,
+                encoder=SaleListEncoder,
+                safe=False
+            )
+        except Sale.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            sale = Sale.objects.get(id=pk)
+            sale.delete()
+            return JsonResponse(
+                sale,
+                encoder=SaleListEncoder,
+                safe=False,
+            )
+        except Sale.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            sale = Sale.objects.get(id=pk)
+
+            props = ["salesperson", "customer", "automobile", "price"]
+            for prop in props:
+                if prop in content:
+                    setattr(sale, prop, content[prop])
+            sale.save()
+            return JsonResponse(
+                sale,
+                encoder=SaleListEncoder,
+                safe=False,
+            )
+        except Sale.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
