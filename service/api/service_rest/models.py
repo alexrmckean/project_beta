@@ -14,7 +14,7 @@ class AutomobileVO(models.Model):
     sold = models.BooleanField(default=False)
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField(unique=True)
     reason = models.CharField(max_length=100, unique=True)
     status = models.BooleanField(default=False)
     vin = models.CharField(max_length=100, unique=True)
