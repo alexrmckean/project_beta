@@ -1,80 +1,92 @@
 import React, {useEffect, useState} from 'react';
 
 function TechnicianForm() {
+  const [technicians, setTechnicians] = useState([])
 
-    const [employee_id, setEmployee_ID] = useState('');
-    const [first_name, setFirst_Name] = useState('');
-    const [last_name, setLast_Name] = useState('');
+  const [formData, setFormData] = useState({
+    employee_id: '',
+    first_name: '',
+    last_name: '',
+  })
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  const fetchData = async () => {
+    const technicianUrl = "http://localhost:8080/api/technicians/";
+    const response = await fetch(technicianUrl);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        const data = {};
-        data.employee_id = employee_id;
-        data.first_name = first_name;
-        data.last_name = last_name;
-
-        const technicianUrl = 'http://localhost:8080/api/technicians/';
-        const fetchConfig = {
-            method: 'post',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        const response = await fetch(technicianUrl, fetchConfig);
-        if (response.ok) {
-            const newTechnician = await response.json();
-            console.log(newTechnician);
-
-            setEmployee_ID('');
-            setFirst_Name('');
-            setLast_Name('');
-        }
+    if (response.ok) {
+      const data = await response.json();
+      setTechnicians(data.technician);
     }
+  }
 
-    const handleChangeEmployee_ID = (event) => {
-        const value = event.target.value;
-        setEmployee_ID(value);
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleChangeFirst_Name = (event) => {
-        const value = event.target.value;
-        setFirst_Name(value);
-    }
+    const technicianUrl = "http://localhost:8080/api/technicians/";
 
-    const handleChangeLast_Name = (event) => {
-        const value = event.target.value;
-        setLast_Name(value);
-    }
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    return (
+    const response = await fetch(technicianUrl, fetchConfig);
+    if (response.ok){
+      setFormData({
+        first_name: '',
+        last_name: '',
+        employee_id: '',
+      });
+    };
+  }
+
+  const handleFormChange = (e) => {
+    const value = e.target.value;
+    const inputName = e.target.name;
+
+    setFormData({
+      ...formData,
+      [inputName]: value
+    });
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div className="container">
         <div className="row">
-          <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-              <h1>Add a technician</h1>
-              <form onSubmit={handleSubmit} id="create-technician-form">
-                <div className="form-floating mb-3">
-                  <input value={first_name} onChange={handleChangeFirst_Name} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
-                  <label htmlFor="first_name">First Name</label>
+            <div className="offset-3 col-6">
+                <div className="shadow p-4 mt-4">
+                    <h1>Create A Technician</h1>
+                    <form onSubmit={handleSubmit} id="create-technician-form">
+
+                        <div className="form-floating mb-3">
+                            <input onChange={handleFormChange} value={formData.first_name} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" autoComplete='off' />
+                            <label htmlFor="first_name">First Name</label>
+                        </div>
+
+                        <div className="form-floating mb-3">
+                            <input onChange={handleFormChange} value={formData.last_name} placeholder="Last Name" required type="text" name="last_name" id="last_name" className="form-control" autoComplete='off'/>
+                            <label htmlFor="last_name">Last Name</label>
+                        </div>
+
+                        <div className="form-floating mb-3">
+                            <input onChange={handleFormChange} value={formData.employee_id} placeholder="Employee Id" required type="text" name="employee_id" id="employee_id" className="form-control" autoComplete='off'/>
+                            <label htmlFor="employee_id">Employee Id</label>
+                        </div>
+
+                        <button className="btn btn-primary">Create</button>
+
+                    </form>
                 </div>
-                <div className="form-floating mb-3">
-                  <input value={last_name} onChange={handleChangeLast_Name} placeholder="Last Name" required type="text" name="last_name" id="last_name" className="form-control" />
-                  <label htmlFor="last_name">Last Name</label>
-                </div>
-                <div className="form-floating mb-3">
-                  <input value={employee_id} onChange={handleChangeEmployee_ID} placeholder="Employee ID" required type="text" name="employee_id" id="employee_id" className="form-control" />
-                  <label htmlFor="employee_id">Employee IDr</label>
-                </div>
-                <button className="btn btn-primary">Create</button>
-              </form>
             </div>
-          </div>
         </div>
-      );
+    </div>
+);
 }
+
 export default TechnicianForm
