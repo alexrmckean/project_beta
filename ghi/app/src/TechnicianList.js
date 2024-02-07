@@ -7,8 +7,9 @@ function TechnicianList(){
     const getData = async () => {
         const response = await fetch('http://localhost:8080/api/technicians/');
         if (response.ok) {
-            const { technicians } = await response.json();
-            setTechnicians(technicians);
+            const { technician } = await response.json();
+            setTechnicians(technician);
+            console.log(technician)
         } else {
             console.error('An error occurred fetching the data');
         }
@@ -33,15 +34,14 @@ function TechnicianList(){
                 </tr>
               </thead>
               <tbody>
-                {technicians.map(technician => {
-
+                {technicians.map(technician => (
                     <tr key={technician.id}>
                       <td>{ technician.employee_id }</td>
                       <td>{ technician.first_name }</td>
                       <td>{ technician.last_name }</td>
                     </tr>
 
-                })}
+                ))}
               </tbody>
             </table>
           </div>
