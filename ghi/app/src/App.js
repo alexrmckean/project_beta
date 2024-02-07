@@ -10,7 +10,8 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentList from './AppointmentList';
 import AppointmentForm from './AppointmentForm';
 
-
+import ManufacturersList from './ManufacturerList';
+import ManufacturerForm from './ManufacturerForm';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           <Route path="technicians/create" element={<TechnicianForm />} />
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointments/create" element={<AppointmentForm />} />
+
+          <Route path="manufacturers" element={<ManufacturersList />} />
+          <Route path="manufacturers/create" element={<ManufacturerForm />} />
         </Routes>
       </div>
     </BrowserRouter>

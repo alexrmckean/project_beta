@@ -18,6 +18,21 @@ function AppointmentList(){
         getData();
     }, []);
 
+    // const markVIP = async (vin) => {
+    //   try {
+    //     const response = await fetch(`http://localhost:8100/api/automobiles/${vin}/`, {
+    //       method: 'GET',
+    //     });
+    //     if (response.ok){
+    //       console.log('Got the data')
+    //     } else {
+    //       console.log('Failed to fetch data');
+    //     }
+    //   } catch (error) {
+    //     console.log('Error to get data:', error);
+    //   }
+    // };
+
 
     return (
         <div className="my-5 container">
@@ -43,8 +58,8 @@ function AppointmentList(){
                       <td>{ appointment.vin }</td>
                       <td>No</td>
                       <td>{ appointment.customer }</td>
-                      <td>{ appointment.date_time }</td>
-                      <td> </td>
+                      <td>{new Date(appointment.date_time).toLocaleDateString()}</td>
+                      <td>{new Date(appointment.date_time).toLocaleTimeString()}</td>
                       <td>{ appointment.technician }</td>
                       <td>{ appointment.reason }</td>
                       <td>{ appointment.status }</td>
