@@ -11,7 +11,7 @@ class AutomobileVOListEncoder(ModelEncoder):
     properties = [
         "import_href",
         "vin",
-        "manufacturer",
+        "sold",
     ]
 
 
@@ -192,7 +192,11 @@ def api_sale_list(request):
         try:
             # automobile_href = content["automobile"]
             automobile = AutomobileVO.objects.get(id=content["automobile"])
+            salesperson = Salesperson.objects.get(id=content["salesperson"])
+            customer = Customer.objects.get(id=content["customer"])
             content["automobile"] = automobile
+            content["salesperson"] = salesperson
+            content["customer"] = customer
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid automobile id"},
