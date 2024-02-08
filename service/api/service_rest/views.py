@@ -94,7 +94,8 @@ def api_list_appointments(request):
     else: #POST
         try:
             content = json.loads(request.body)
-            technician_id = content["technician_id"]
+            technician_id = content["technician"]
+            print(technician_id)
             technician = Technician.objects.get(id=technician_id)
             content["technician"] = technician
             appointment = Appointment.objects.create(**content)
