@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Technician(models.Model):
-    first_name = models.CharField(max_length=100, unique=True)
-    last_name = models.CharField(max_length=100, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     employee_id = models.PositiveSmallIntegerField(unique=True)
 
 
@@ -14,11 +14,11 @@ class AutomobileVO(models.Model):
     sold = models.BooleanField(default=False)
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField(unique=True)
-    reason = models.CharField(max_length=100, unique=True)
+    date_time = models.DateTimeField()
+    reason = models.CharField(max_length=100)
     status = models.CharField(max_length=100, default="pending")
-    vin = models.CharField(max_length=100, unique=True)
-    customer = models.CharField(max_length=100, unique=True)
+    vin = models.CharField(max_length=100)
+    customer = models.CharField(max_length=100)
 
     technician = models.ForeignKey(
         Technician,

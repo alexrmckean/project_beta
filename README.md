@@ -7,6 +7,8 @@ Team:
 
 ## Design
 
+## Diagram
+
 ## Service microservice
 
 Explain your models and integration with the inventory

@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
 
-
 function AppointmentForm(){
    const [technicians, setTechnicians] = useState([])
-
 
    const [formData, setFormData] = useState({
        date_time: '',
        reason: '',
-       status: '',
        vin: '',
        customer: '',
        technician: '',
    })
-
 
    const fetchData = async () => {
        const url = 'http://localhost:8080/api/technicians/'
@@ -24,18 +20,14 @@ function AppointmentForm(){
        }
    }
 
-
    useEffect(() => {
        fetchData();
    }, []);
 
-
    const handleSubmit = async (event) => {
        event.preventDefault();
 
-
        const url = 'http://localhost:8080/api/appointments/'
-
 
        const fetchConfig = {
            method: "POST",
@@ -45,13 +37,11 @@ function AppointmentForm(){
            },
        };
 
-
        const response = await fetch(url, fetchConfig);
        if (response.ok) {
            setFormData({
                date_time: '',
                reason: '',
-               status: '',
                vin: '',
                customer: '',
                technician: '',
@@ -59,22 +49,16 @@ function AppointmentForm(){
        }
    }
 
-
    const handleFormChange = (e) => {
        const value = e.target.value;
        const inputName = e.target.name;
 
-
        setFormData({
            ...formData,
-
 
            [inputName]: value
        });
    }
-
-
-
 
    return (
        <div className="row">
@@ -121,6 +105,5 @@ function AppointmentForm(){
        </div>
      )
 }
-
 
 export default AppointmentForm;
