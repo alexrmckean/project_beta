@@ -28,12 +28,20 @@ function AutomobileForm(){
 
        const url = 'http://localhost:8100/api/automobiles/'
 
+       const requestData = {
+        ...formData,
+        color: formData.color,
+        year: formData.year,
+        vin: formData.vin,
+        model_id: formData.model
+     }
+
 
        console.log(formData)
 
        const fetchConfig = {
            method: "POST",
-           body: JSON.stringify(formData),
+           body: JSON.stringify(requestData),
            headers: {
                'Content-Type': 'application/json',
            },

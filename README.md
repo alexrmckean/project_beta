@@ -8,7 +8,7 @@ Team:
 ## Design
 
 ## Diagram
-
+![Alt text](image.png)
 ## Service microservice
 
 Explain your models and integration with the inventory
