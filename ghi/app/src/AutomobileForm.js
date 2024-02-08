@@ -36,9 +36,6 @@ function AutomobileForm(){
         model_id: formData.model
      }
 
-
-       console.log(formData)
-
        const fetchConfig = {
            method: "POST",
            body: JSON.stringify(requestData),
@@ -48,7 +45,6 @@ function AutomobileForm(){
        };
 
        const response = await fetch(url, fetchConfig);
-       console.log(response)
        if (response.ok) {
            setFormData({
                color: '',
@@ -69,7 +65,6 @@ function AutomobileForm(){
            [inputName]: value
        });
    }
-   console.log(formData)
 
    return (
        <div className="row">
