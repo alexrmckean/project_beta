@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 function CreateSalespersonForm() {
     const [setSalesperson] = useState([])
-
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -42,6 +41,7 @@ function CreateSalespersonForm() {
         };
     }
 
+
     const handleFormChange = (e) => {
         const value = e.target.value;
         const inputName = e.target.name;
@@ -51,10 +51,12 @@ function CreateSalespersonForm() {
         });
     }
 
+
     useEffect(() => {
     fetchData();
     }, []);
 
+    
     return (
         <div className="container">
             <div className="row">

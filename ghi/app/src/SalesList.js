@@ -12,7 +12,6 @@ function SalesList(){
             console.error("Error occured while fetching sale data")
         }
     }
-
     const handleDelete = async (e) => {
         const id = e.target.dataset.id
 
@@ -23,10 +22,12 @@ function SalesList(){
         }
     }
 
+
     useEffect(()=>{
         getData()
     }, []);
 
+    
     return (
     <>
         <div className="my-5 container">

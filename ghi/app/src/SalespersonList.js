@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 function SalespersonList(){
     const [salesperson, setSalesperson] = useState([]);
-
     const getData = async () => {
         const response = await fetch("http://localhost:8090/api/salespeople/")
         if (response.ok) {
@@ -24,9 +23,11 @@ function SalespersonList(){
         }
     }
 
+
     useEffect(()=>{
         getData()
     }, []);
+
 
     return (
     <>
