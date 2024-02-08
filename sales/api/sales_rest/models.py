@@ -28,7 +28,7 @@ class Customer(models.Model):
 class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True, default=None)
     vin = models.CharField(max_length=17, unique=True)
-    manufacturer= models.CharField(max_length=200)
+    sold = models.BooleanField(default=False)
 
     def __str__(self):
         self.name
