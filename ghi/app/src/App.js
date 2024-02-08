@@ -17,8 +17,6 @@ import ManufacturersList from './ManufacturerList';
 import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
 import ServiceHistoryList from './ServiceHistory';
-import ManufacturersList from './ManufacturerList';
-import ManufacturerForm from './ManufacturerForm';
 import CreateVehicleForm from './CreateVehicleForm';
 
 function App() {
