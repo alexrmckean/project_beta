@@ -31,7 +31,6 @@ function App() {
           <Route path="technicians/create" element={<TechnicianForm />} />
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointments/create" element={<AppointmentForm />} />
-
           <Route path="manufacturers" element={<ManufacturersList />} />
           <Route path="manufacturers/create" element={<ManufacturerForm />} />
           <Route path="sales/" element={<SalesList />} />
