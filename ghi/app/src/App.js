@@ -60,7 +60,6 @@ function App() {
           <Route path="automobiles" element={<AutomobileList />} />
           <Route path="automobiles/create" element={<AutomobileForm />} />
 
-
           <Route path="vehicles/" element={<VehicleList />} />
           <Route path="vehicles/create/" element={<CreateVehicleForm />} />
 
