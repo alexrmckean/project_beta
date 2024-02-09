@@ -30,8 +30,8 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
 
-    def __str__(self):
-        self.name
+    # def __str__(self):
+    #     self.import_href
 
 
 class Sale(models.Model):
