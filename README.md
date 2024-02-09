@@ -1,5 +1,5 @@
 # CarCar
-CarCar is an application for managing your automobile dealership! It manages the inventory of cars (both models and specific automobiles), service appointments, sales, and as well as all of the people involved (technicians, salespeople, and customers). This app is a one stop shop for you and your car business! With CarCar all you have to do now is SELL SELL SELL... and fix customer's cars!
+CarCar is an application for managing your automobile dealership! It manages the inventory of cars (both models and specific automobiles), service appointments, sales, as well as all of the people involved (technicians, salespeople, and customers). This app is a one stop shop for you and your car business! With CarCar all you have to do now is SELL SELL SELL... and fix customer's cars!
 
 Team:
 
@@ -50,7 +50,7 @@ Here's how this all works. We have an inventory of automobiles. Each automobile 
 
 ## Sales microservice, a brief intro
 
-The sales model microservice will show details of a sale. When we create the sales microservice, it is a microservice that pulls information the Inventory API. In the models.py file, sales will have the attributes of:
+The sales model microservice will show details of a sale. When we create the sales microservice, it is a microservice that pulls information from the Inventory API. In the models.py file, sales will have the attributes of:
 - automobile will have a foreign key to the Automobile Value Object (VO).
 - salesperson will have a foreign key to the Salesperson Model.
 - customer will have a foreign key to the Customer Model.
