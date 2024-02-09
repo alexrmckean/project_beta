@@ -76,7 +76,7 @@ Method | URL | What it does
 GET	| localhost:8080/api/technicians/ | Gets a list of all of the technicians
 POST | localhost:8080/api/technicians/ | Creates a new technician with the posted data
 DELETE | localhost:8080/api/technicians/:id/ | Deletes a single technician
-GET	| localhost:8080/api/appointmenst/ | Gets a list of all of the appointments
+GET	| localhost:8080/api/appointments/ | Gets a list of all of the appointments
 POST | localhost:8080/api/appointments/ | Creates a new appointment with the posted data
 DELETE | localhost:8080/api/appointments/:id/ | Deletes a single appointment
 PUT | localhost:8080/api/appointments/:id/cancel/ | Sets appointment status to "canceled"
