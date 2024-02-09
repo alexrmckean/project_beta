@@ -1,5 +1,5 @@
 # CarCar
-CarCar is an application for managing your automobile dealership! It manages the inventory of cars(both models and specific automobiles), service appointments, sales, and as well as all of the people involved(technicians, salespeople, and customers). This app is a one stop shop for you and your car business! With CarCar all you have to do now is SELL SELL SELL... and fix customer's cars!
+CarCar is an application for managing your automobile dealership! It manages the inventory of cars (both models and specific automobiles), service appointments, sales, and as well as all of the people involved (technicians, salespeople, and customers). This app is a one stop shop for you and your car business! With CarCar all you have to do now is SELL SELL SELL... and fix customer's cars!
 
 Team:
 
@@ -14,7 +14,7 @@ Team:
 1. Fork this repository.
 
 2. Clone the forked repository onto your local computer:
-git clone <https://gitlab.com/leeshiela12/microservice-two-shot-alex-shiela>
+git clone <https://gitlab.com/alexrmckean/project-beta>
 
 3. Build and run the project using Docker with these commands:
 ```
@@ -45,7 +45,7 @@ CarCar is made up of 3 microservices which interact with one another.
 
 Our Sales and Service domains work together with our Inventory domain to make everything here at **CarCar** possible.
 
-Here's how this all works. We have an inventory of automobiles. Each automobile has a model type and manufacturer. Each sale has a customer, a salesperson, and an automobile(the thing being sold). Each service appointment has a customer, a service technician, and an automobile(the thing being serviced). Using a **poller**, we use an automobile value object which points towards an automobile in Inventory. This value object is kept up to date with the poller functionality. This keeps track of the automobile details and gives up to date information. When creating a new sale or service, the dropdown menu will automatically display the value object using the automobile VIN(Vehicle Identification Number) as reference.
+Here's how this all works. We have an inventory of automobiles. Each automobile has a model type and manufacturer. Each sale has a customer, a salesperson, and an automobile (the thing being sold). Each service appointment has a customer, a service technician, and an automobile (the thing being serviced). Using a **poller**, we use an automobile value object which points towards an automobile in Inventory. This value object is kept up to date with the poller functionality. This keeps track of the automobile details and gives up to date information. When creating a new sale or service, the dropdown menu will automatically display the value object using the automobile VIN(Vehicle Identification Number) as reference.
 
 
 ## Sales microservice, a brief intro
@@ -72,11 +72,10 @@ The appointments model for the service microservice will show details of a servi
 
 ## Service microservice
 Method | URL | What it does
-| ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 GET	| localhost:8080/api/technicians/ | Gets a list of all of the technicians
 POST | localhost:8080/api/technicians/ | Creates a new technician with the posted data
 DELETE | localhost:8080/api/technicians/:id/ | Deletes a single technician
-
 GET	| localhost:8080/api/appointmenst/ | Gets a list of all of the appointments
 POST | localhost:8080/api/appointments/ | Creates a new appointment with the posted data
 DELETE | localhost:8080/api/appointments/:id/ | Deletes a single appointment
@@ -144,15 +143,13 @@ The reason for integration between these two models is that when recording a new
 
 ## Sales microservice
 Method | URL | What it does
-| ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 GET	| localhost:8090/api/salespeople/ | Gets a list of all of the salespeople
 POST | localhost:8090/api/salespeople/ | Creates a new salesperson with the posted data
 DELETE | localhost:8090/api/salespeople/:id/ | Deletes a single salesperson
-
 GET	| localhost:8090/api/customers/ | Gets a list of all of the customers
 POST | localhost:8090/api/customers/ | Creates a new customer with the posted data
 DELETE | localhost:8090/api/customers/:id/ | Deletes a single customer
-
 GET	| localhost:8090/api/sales/ | Gets a list of all of the sales
 POST | localhost:8090/api/sales/ | Creates a new sale with the posted data
 DELETE | localhost:8090/api/sales/:id/ | Deletes a single sale
@@ -266,4 +263,3 @@ On the backend, the sales microservice has 3 models: AutomobileVO, Sale and Cust
 The AutomobileVO is a value object that gets data about the automobile in the inventory using a poller. The automobile poller automotically polls the Inventory microservice for data, so the sales microservice is constantly getting the updated data.
 
 The reason for integration between these models is that when recording a new sale, you'll need to choose which automobile is being sold and that automobiles' information lives inside of the inventory microservice.
-
