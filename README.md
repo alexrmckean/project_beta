@@ -4,7 +4,7 @@ CarCar is an application for managing your automobile dealership! It manages the
 Team:
 
 * Alex McKean - Sales Microservice (Sales, Salespeople, Customers), Inventory Microservice (Vehicles)
-* Lyle - Service Microservice (Technicians, Appointments), Inventory Microservice (Manufacturers, Automobiles)
+* Lyle Toledo - Service Microservice (Technicians, Appointments), Inventory Microservice (Manufacturers, Automobiles)
 
 
 ## Getting Started
