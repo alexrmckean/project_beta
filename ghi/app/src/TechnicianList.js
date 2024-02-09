@@ -9,7 +9,6 @@ function TechnicianList(){
         if (response.ok) {
             const { technician } = await response.json();
             setTechnicians(technician);
-            console.log(technician)
         } else {
             console.error('An error occurred fetching the data');
         }
