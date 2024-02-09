@@ -19,35 +19,27 @@ function ServiceHistoryList(){
         getData();
     }, []);
 
-    // const markVIP = async (vin) => {
-    //   try {
-    //     const response = await fetch(`http://localhost:8100/api/automobiles/${vin}/`, {
-    //       method: 'GET',
-    //     });
-    //     if (response.ok){
-    //       console.log('Got the data')
-    //     } else {
-    //       console.log('Failed to fetch data');
-    //     }
-    //   } catch (error) {
-    //     console.log('Error to get data:', error);
-    //   }
-    // };
 
-    // function handleFilterFirstChange(e){
-    //     setFilterFirstValue(e.target.value);
-    // }
+    function handleFilterFirstChange(e){
+        setFilterFirstValue(e.target.value);
+    }
 
-    // const filteredVin = appointments.filter((vin) =>
-    //     vin.first.includes(filterFirstValue)
-    // );
+    const filteredAppointments = appointments.filter(appointment =>
+      appointment.vin.toLowerCase().includes(filterFirstValue.toLowerCase())
+    );
+
+    const inventoryVINs = ['VIN1', 'VIN2', 'VIN3'];
+
+    const isVIPAppointment = (vin) => {
+      return inventoryVINs.includes(vin);
+    }
 
     return (
         <div className="my-5 container">
           <div className="row">
             <h1>Service History</h1>
 
-            {/* <input onChange={handleFilterFirstChange} placeholder="search by VIN"/> */}
+            <input onChange={handleFilterFirstChange} type="text" placeholder="search by VIN" className="form-control mb-3"/>
 
             <table className="table table-striped m-3">
               <thead>
@@ -63,10 +55,10 @@ function ServiceHistoryList(){
                 </tr>
               </thead>
               <tbody>
-                {appointments.map(appointment => (
+                {filteredAppointments.map(appointment => (
                     <tr key={appointment.id}>
                       <td>{ appointment.vin }</td>
-                      <td>No</td>
+                      <td>{isVIPAppointment(appointment.vin) ? 'Yes' : 'No'}</td>
                       <td>{ appointment.customer }</td>
                       <td>{new Date(appointment.date_time).toLocaleDateString()}</td>
                       <td>{new Date(appointment.date_time).toLocaleTimeString()}</td>

@@ -12,12 +12,13 @@ import TechnicianList from './TechnicianList';
 import TechnicianForm from './TechnicianForm';
 import AppointmentList from './AppointmentList';
 import AppointmentForm from './AppointmentForm';
-import ManufacturerForm from './ManufacturerForm';
-import ManufacturersList from './ManufacturerList';
 import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
 import ServiceHistoryList from './ServiceHistory';
 import CreateVehicleForm from './CreateVehicleForm';
+
+import ManufacturerForm from './ManufacturerForm';
+import ManufacturersList from './ManufacturerList';
 
 function App() {
   return (
