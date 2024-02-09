@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 function ServiceHistoryList(){
     const [appointments, setAppointments] = useState([])
     const [filterFirstValue, setFilterFirstValue] = useState('');
+    const [automobilesVins, setAutomobileVins] = useState([]);
 
 
     const getData = async () => {
@@ -12,6 +13,15 @@ function ServiceHistoryList(){
             setAppointments(appointments);
         } else {
             console.error('An error occurred fetching the data');
+        }
+
+        const automobileResponse = await fetch('http://localhost:8100/api/automobiles/')
+        if (automobileResponse.ok) {
+          const { autos } = await automobileResponse.json();
+          const vins = autos.map(auto => auto.vin);
+          setAutomobileVins(vins);
+        } else {
+          console.error('An error occured fetching the automobile data');
         }
     };
 
@@ -28,10 +38,9 @@ function ServiceHistoryList(){
       appointment.vin.toLowerCase().includes(filterFirstValue.toLowerCase())
     );
 
-    const inventoryVINs = ['VIN1', 'VIN2', 'VIN3'];
 
     const isVIPAppointment = (vin) => {
-      return inventoryVINs.includes(vin);
+      return automobilesVins.includes(vin);
     }
 
     return (

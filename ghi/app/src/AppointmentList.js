@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 function AppointmentList(){
     const [appointments, setAppointments] = useState([])
+    const [automobilesVins, setAutomobileVins] = useState([]);
 
 
     const getData = async () => {
@@ -11,6 +12,15 @@ function AppointmentList(){
             setAppointments(appointments);
         } else {
             console.error('An error occurred fetching the data');
+        }
+
+        const automobileResponse = await fetch('http://localhost:8100/api/automobiles/')
+        if (automobileResponse.ok) {
+          const { autos } = await automobileResponse.json();
+          const vins = autos.map(auto => auto.vin);
+          setAutomobileVins(vins);
+        } else {
+          console.error('An error occured fetching the automobile data');
         }
     };
 
@@ -59,10 +69,8 @@ function AppointmentList(){
       }
     };
 
-    const inventoryVINs = [];
-
     const isVIPAppointment = (vin) => {
-      return inventoryVINs.includes(vin);
+      return automobilesVins.includes(vin);
     }
 
 
