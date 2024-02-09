@@ -54,7 +54,7 @@ function CreateCustomerForm() {
     }
 
     useEffect(() => {
-    fetchData();
+        fetchData();
     }, []);
 
     return (
