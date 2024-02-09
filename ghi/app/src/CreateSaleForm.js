@@ -71,7 +71,7 @@ function CreateSaleForm() {
                 price: "",
             });
         };
-        // console.log(formData)
+
     }
         catch(error)
         {console.log('error',error)}
@@ -79,13 +79,10 @@ function CreateSaleForm() {
 
 
     useEffect(() => {
-        // fetchData();
         fetchCustomerData();
         fetchSalespersonData();
         fetchAutomobileData();
     }, []);
-
-    console.log(formData)
 
 
     return (

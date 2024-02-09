@@ -10,7 +10,6 @@ function SalespersonHistoryList(){
         const response = await fetch("http://localhost:8090/api/sales/");
         if (response.ok) {
             const data  = await response.json();
-            console.log("this is supposed to be data", data)
             setSales(
                 data.sale.map((sale) => {
                     return {
@@ -41,7 +40,6 @@ function SalespersonHistoryList(){
         getData();
     }, []);
 
-    console.log(filteredSale)
     return (
     <>
         <div className="my-5 container">
