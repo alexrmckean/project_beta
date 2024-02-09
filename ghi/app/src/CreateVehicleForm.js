@@ -1,45 +1,43 @@
 import React, { useEffect, useState } from "react";
 
 function CreateVehicleForm() {
-    const [manufacturer, setManufacturer] = useState([])
+    const [manufacturers, setManufacturers] = useState([])
     const [formData, setFormData] = useState({
         name: "",
         picture_url: "",
         manufacturer: "",
     })
 
-    const fetchManufacturerData = async () => {
-        const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
-        const response = await fetch(manufacturerUrl);
+    const fetchData = async () => {
+        const url = 'http://localhost:8100/api/manufacturers/'
+        const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            setManufacturer(data.manufacturer);
+            setManufacturers(data.manufacturers)
         }
-    }
-
-    const handleFormChange = (e) => {
-        const value = e.target.value;
-        const inputName = e.target.name;
-
-        setFormData({
-            ...formData, [inputName]: value
-        });
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const vehicleUrl = "http://localhost:8100/api/models/";
 
-            const fetchConfig = {
-                method: "POST",
-                body: JSON.stringify(formData),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
+        const url = "http://localhost:8100/api/models/";
 
-        const response = await fetch(vehicleUrl, fetchConfig);
+        const requestData = {
+            ...formData,
+            name: formData.name,
+            picture_url: formData.picture_url,
+            manufacturer_id: formData.manufacturer
+         }
+
+        const fetchConfig = {
+            method: "POST",
+            body: JSON.stringify(requestData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const response = await fetch(url, fetchConfig);
         if (response.ok) {
             setFormData({
                 name: "",
@@ -48,16 +46,20 @@ function CreateVehicleForm() {
             });
         };
     }
-        catch(error)
-        {console.log('error',error)}
 
+    const handleFormChange = (e) => {
+        const value = e.target.value;
+        const inputName = e.target.name;
+
+        setFormData({
+            ...formData,[inputName]: value
+        });
     }
 
-    useEffect(() => {
-        fetchManufacturerData();
-    }, []);
 
-    console.log(formData)
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <div className="container">
@@ -75,14 +77,10 @@ function CreateVehicleForm() {
                                 <input onChange={handleFormChange} value={formData.picture_url} placeholder="Picture URL" required type="url" name="picture_url" id="picture_url" className="form-control" />
                                 <label htmlFor="picture_url">Picture</label>
                             </div>
-                            <div className="form-floating mb-3">
-                                <input onChange={handleFormChange} value={formData.employee_id} placeholder="Employee Id" required type="text" name="employee_id" id="employee_id" className="form-control" />
-                                <label htmlFor="employee_id">Employee Id</label>
-                            </div>
                             <div className="mb-3">
                                 <select onChange={handleFormChange} value={formData.manufacturer} required name="manufacturer" id="manufacturer" className="form-select">
                                     <option value="">Select Manufacturer</option>
-                                    {manufacturer.map(manufacturer => {
+                                    {manufacturers.map(manufacturer => {
                                         return (
                                             <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
                                         )
