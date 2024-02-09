@@ -18,20 +18,49 @@ function AppointmentList(){
         getData();
     }, []);
 
-    // const markVIP = async (vin) => {
-    //   try {
-    //     const response = await fetch(`http://localhost:8100/api/automobiles/${vin}/`, {
-    //       method: 'GET',
-    //     });
-    //     if (response.ok){
-    //       console.log('Got the data')
-    //     } else {
-    //       console.log('Failed to fetch data');
-    //     }
-    //   } catch (error) {
-    //     console.log('Error to get data:', error);
-    //   }
-    // };
+    const cancelAppointment = async (id) => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/appointments/${id}/cancel/`, {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if(response.ok) {
+          setAppointments(prevAppointments => prevAppointments.filter(appointment => appointment.id !== id));
+        } else {
+          console.error("Failed to cancel appointment");
+        }
+
+      } catch (error) {
+        console.error("Error canceling appointment:: ", error);
+      }
+    };
+
+    const finishAppointment = async (id) => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/appointments/${id}/finish/`, {
+          method: "PUT",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if(response.ok) {
+          setAppointments(prevAppointments => prevAppointments.filter(appointment => appointment.id !== id));
+        } else {
+          console.error("Failed to finish appointment");
+        }
+
+      } catch (error) {
+        console.error("Error finishing appointment:: ", error);
+      }
+    };
+
+    const inventoryVINs = ['VIN1', 'VIN2', 'VIN3'];
+
+    const isVIPAppointment = (vin) => {
+      return inventoryVINs.includes(vin);
+    }
 
 
     return (
@@ -56,13 +85,16 @@ function AppointmentList(){
                 {appointments.map(appointment => (
                     <tr key={appointment.id}>
                       <td>{ appointment.vin }</td>
-                      <td>No</td>
+                      <td>{isVIPAppointment(appointment.vin) ? 'Yes' : 'No'}</td>
                       <td>{ appointment.customer }</td>
                       <td>{new Date(appointment.date_time).toLocaleDateString()}</td>
                       <td>{new Date(appointment.date_time).toLocaleTimeString()}</td>
                       <td>{ appointment.technician }</td>
                       <td>{ appointment.reason }</td>
-                      <td>{ appointment.status }</td>
+                      <td>
+                        <button onClick={() => cancelAppointment(appointment.id)}>Cancel</button>
+                        <button onClick={() => finishAppointment(appointment.id)}>Finish</button>
+                      </td>
                     </tr>
 
                 ))}
