@@ -53,10 +53,10 @@ function CreateSalespersonForm() {
 
 
     useEffect(() => {
-    fetchData();
+        fetchData();
     }, []);
 
-    
+
     return (
         <div className="container">
             <div className="row">
