@@ -25,6 +25,8 @@ function AppointmentList(){
           headers: {
             'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ id, status: "cancel" })
+
         });
         if(response.ok) {
           setAppointments(prevAppointments => prevAppointments.filter(appointment => appointment.id !== id));
@@ -44,6 +46,7 @@ function AppointmentList(){
           headers: {
             'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ id, status:"finish" })
         });
         if(response.ok) {
           setAppointments(prevAppointments => prevAppointments.filter(appointment => appointment.id !== id));
@@ -56,7 +59,7 @@ function AppointmentList(){
       }
     };
 
-    const inventoryVINs = ['VIN1', 'VIN2', 'VIN3'];
+    const inventoryVINs = [];
 
     const isVIPAppointment = (vin) => {
       return inventoryVINs.includes(vin);
@@ -82,7 +85,9 @@ function AppointmentList(){
                 </tr>
               </thead>
               <tbody>
-                {appointments.map(appointment => (
+                {appointments
+                .filter(appointment=> appointment.status === "pending")
+                .map(appointment => (
                     <tr key={appointment.id}>
                       <td>{ appointment.vin }</td>
                       <td>{isVIPAppointment(appointment.vin) ? 'Yes' : 'No'}</td>
