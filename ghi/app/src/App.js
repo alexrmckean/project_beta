@@ -20,9 +20,6 @@ import VehicleList from './VehicleList';
 import ManufacturerForm from './ManufacturerForm'
 import ManufacturersList from './ManufacturerList'
 
-import ManufacturerForm from './ManufacturerForm';
-import ManufacturersList from './ManufacturerList';
-
 function App() {
   return (
     <BrowserRouter>
