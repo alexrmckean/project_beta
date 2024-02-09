@@ -72,7 +72,7 @@ The appointments model for the service microservice will show details of a servi
 
 ## Service microservice
 Method | URL | What it does
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ |
 GET	| localhost:8080/api/technicians/ | Gets a list of all of the technicians
 POST | localhost:8080/api/technicians/ | Creates a new technician with the posted data
 DELETE | localhost:8080/api/technicians/:id/ | Deletes a single technician
@@ -143,7 +143,7 @@ The reason for integration between these two models is that when recording a new
 
 ## Sales microservice
 Method | URL | What it does
-| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ |
 GET	| localhost:8090/api/salespeople/ | Gets a list of all of the salespeople
 POST | localhost:8090/api/salespeople/ | Creates a new salesperson with the posted data
 DELETE | localhost:8090/api/salespeople/:id/ | Deletes a single salesperson
