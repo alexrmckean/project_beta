@@ -190,8 +190,17 @@ def api_sale_list(request):
     else:
         content = json.loads(request.body)
         try:
-            # automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(id=content["automobile"])
+            import_href = f"/api/automobiles/{content['automobile']}/"
+            vo = AutomobileVO.objects.all()
+            # return(JsonResponse(
+            #     vo,
+            #     encoder=AutomobileVOListEncoder,
+            #     safe=False,
+            #     ))
+
+            print("VO", AutomobileVO.objects.all())
+            automobile = AutomobileVO.objects.get(import_href=import_href)
+            print("automobile", automobile)
             salesperson = Salesperson.objects.get(id=content["salesperson"])
             customer = Customer.objects.get(id=content["customer"])
             content["automobile"] = automobile
